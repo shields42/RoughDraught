@@ -5,6 +5,7 @@ package com.thebeerdudes.thacher.roughdraught;
  */
 
 public class Beer {
+    private int _id;
     protected String name;
     protected String type;
     protected String style;
@@ -25,6 +26,14 @@ public class Beer {
         this.rating = rating;
         this.description = description;
         this.location = location;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
+    }
+
+    public int get_id() {
+        return _id;
     }
 
     public String getName() {
