@@ -15,8 +15,9 @@ public class Beer {
     protected long   rating;
     protected String description;
     protected String location;
+    protected String _date;
 
-    public Beer(String name, String type, String style, String brewery, String imagePath, int stars, long rating, String description, String location) {
+    public Beer(String name, String type, String style, String brewery, String imagePath, int stars, long rating, String description, String location, String date) {
         this.name = name;
         this.type = type;
         this.style = style;
@@ -26,8 +27,15 @@ public class Beer {
         this.rating = rating;
         this.description = description;
         this.location = location;
+        this._date = date;
+    }
+    public void set_date(String _date) {
+        this._date = _date;
     }
 
+    public String get_date() {
+        return _date;
+    }
     public void set_id(int _id) {
         this._id = _id;
     }

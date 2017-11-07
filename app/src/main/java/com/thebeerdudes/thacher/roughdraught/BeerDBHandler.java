@@ -25,6 +25,7 @@ public class BeerDBHandler extends SQLiteOpenHelper{
     private static final String COLUMN_RATING = "rating";
     private static final String COLUMN_DESCRIPTION = "description";
     private static final String COLUMN_LOCATION = "location";
+    private static final String COLUMN_DATE = "date";
 
     public BeerDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -41,7 +42,8 @@ public class BeerDBHandler extends SQLiteOpenHelper{
                 COLUMN_STARS  + " INTEGER " +
                 COLUMN_RATING + " NUMERIC " +
                 COLUMN_DESCRIPTION  + " TEXT " +
-                COLUMN_LOCATION  + " TEXT "
+                COLUMN_LOCATION  + " TEXT " +
+                COLUMN_DATE + " TEXT "
                 + ");";
         db.execSQL(query);
 
@@ -64,6 +66,7 @@ public class BeerDBHandler extends SQLiteOpenHelper{
         values.put(COLUMN_RATING, entry.getRating());
         values.put(COLUMN_DESCRIPTION, entry.getDescription());
         values.put(COLUMN_LOCATION, entry.getLocation());
+        values.put(COLUMN_DATE, entry.get_date());
         db.insert(TABLE_BEERS, null, values);
     }
 
@@ -91,7 +94,7 @@ public class BeerDBHandler extends SQLiteOpenHelper{
         return dbString;
     }
 
-    public String selectBeer(String beerName) {
+    public String selectBeerName(String beerName) {
         String dbString = "";
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_BEERS + " WHERE " + COLUMN_NAME + " = " + beerName;
