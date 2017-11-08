@@ -19,13 +19,13 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
-    <android.support.design.widget.NavigationView
-        android:layout_width="match_parent"
+    <ListView android:id="@+id/left_drawer"
+        android:layout_width="240dp"
         android:layout_height="match_parent"
-        app:menu="@menu/nav"
         android:layout_gravity="start"
-        >
-
-    </android.support.design.widget.NavigationView>
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:background="#fefefe"/>
 
 </android.support.v4.widget.DrawerLayout>

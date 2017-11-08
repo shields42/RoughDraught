@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgBeerItem"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:scaleType="fitCenter"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/btn_dialog"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/lblBeerName"
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Cavu"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintLeft_toRightOf="@+id/imgBeerItem"
+            app:layout_constraintTop_toTopOf="@+id/imgBeerItem" />
+
+        <TextView
+            android:id="@+id/lblBrewery"
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="0dp"
+            android:text="NoDa Brewing Company"
+            app:layout_constraintBottom_toBottomOf="@+id/imgBeerItem"
+            app:layout_constraintLeft_toRightOf="@+id/imgBeerItem"
+            app:layout_constraintTop_toBottomOf="@+id/lblBeerName"
+            app:layout_constraintVertical_bias="0.4" />
+
+        <TextView
+            android:id="@+id/lblRating"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:text="00"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imgBeerItem"
+            app:layout_constraintLeft_toRightOf="@+id/lblBeerName"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgBeerItem" />
+    </android.support.constraint.ConstraintLayout>
+</LinearLayout>

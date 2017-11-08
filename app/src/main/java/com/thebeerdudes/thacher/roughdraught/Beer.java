@@ -4,25 +4,43 @@ package com.thebeerdudes.thacher.roughdraught;
  * Created by thach on 10/24/2017.
  */
 
-public class Beer {
-    private int _id;
+public class Beer implements Comparable<Beer>{
     protected String name;
     protected String type;
     protected String style;
     protected String brewery;
     protected String imagePath;
+    protected int    icon;
     protected int    stars;
     protected long   rating;
     protected String description;
     protected String location;
     protected String _date;
+    protected int    _id;
 
-    public Beer(String name, String type, String style, String brewery, String imagePath, int stars, long rating, String description, String location, String date) {
+    @Override
+    public int compareTo(Beer b){
+        if(this.getRating()>b.getRating()){
+            return -1;
+        }
+        else if(this.getRating()==b.getRating()){
+            return 0;
+        }
+        else
+            return 1;
+    }
+
+    public Beer(){
+
+    }
+
+    public Beer(String name, String type, String style, String brewery, String imagePath, int icon, int stars, long rating, String description, String location, String date) {
         this.name = name;
         this.type = type;
         this.style = style;
         this.brewery = brewery;
         this.imagePath = imagePath;
+        this.icon = icon;
         this.stars = stars;
         this.rating = rating;
         this.description = description;
@@ -84,6 +102,14 @@ public class Beer {
         this.imagePath = imagePath;
     }
 
+    public int getIcon(){
+        return this.icon;
+    }
+
+    public void setIcon(int icon){
+        this.icon = icon;
+    }
+
     public int getStars() {
         return stars;
     }
@@ -114,5 +140,11 @@ public class Beer {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public int getRatingAsInt(){
+        long l = this.getRating() * 100;
+        int i = (int) l;
+        return i;
     }
 }
