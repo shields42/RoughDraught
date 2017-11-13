@@ -10,6 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Space
+            android:id="@+id/space"
+            android:layout_width="16dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="8dp" />
+
         <ImageView
             android:id="@+id/imgBeerItem"
             android:layout_width="64dp"
@@ -57,15 +65,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
             android:text="00"
             android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="@+id/imgBeerItem"
+            app:layout_constraintEnd_toStartOf="@+id/space"
             app:layout_constraintLeft_toRightOf="@+id/lblBeerName"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imgBeerItem" />
     </android.support.constraint.ConstraintLayout>
 </LinearLayout>

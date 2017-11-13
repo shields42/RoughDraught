@@ -1,64 +1,33 @@
 package com.thebeerdudes.thacher.roughdraught;
 
-import android.app.Activity;
-import android.content.ClipData;
-import android.content.Context;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DrawerLayout sideDrawer;
-    private ActionBarDrawerToggle sideToggle;
     protected ArrayList<Beer> beersList;
     protected ListView lvMain;
     protected MenuItem btnSort;
-    protected ArrayList<String> navItems;
-    protected ListView navList;
-    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Menu Items
-        navItems = new ArrayList<>();
-        navItems.add("Sort");
-        navItems.add("Load sample data");
-        navItems.add("Clear");
-
-        //Side Drawer
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
-        navList = (ListView)findViewById(R.id.left_drawer);
-
-
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         //Main List
         lvMain = (ListView) findViewById(R.id.lvBeers);
-
-
-
-        btnSort = (MenuItem)findViewById(R.id.btnSort);
-
-        //Enable Side Drawer
-        sideDrawer = (DrawerLayout)findViewById(R.id.drawer);
-        sideToggle = new ActionBarDrawerToggle(this, sideDrawer, R.string.open, R.string.close);
-        sideDrawer.addDrawerListener(sideToggle);
-        sideToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         beersList = new ArrayList<>();
         beersList.add(new Beer("Cavu", "Ale", "Blonde Ale", "NoDa Brewing Company", "missing", 3, 5, 100, "It's a good beer.", "missing", "missing"));
@@ -79,18 +48,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if(sideToggle.onOptionsItemSelected(item)){
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mymenu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-            if(item.getItemId()==1){
-                Collections.sort(beersList);
-                BeerAdapter adapter = new BeerAdapter(this, R.layout.beer_item, beersList);
-                lvMain.setAdapter(adapter);
-            }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                // User chose the "Settings" item, show the app settings UI...
+                return true;
 
-            return true;
+            case R.id.action_add:
+                Intent intent=  new Intent(MainActivity.this, AddBeerActivity.class);
+                startActivityForResult(intent, 1);
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
         }
-        return super.onOptionsItemSelected(item);
     }
 
 
