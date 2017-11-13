@@ -20,7 +20,6 @@ public class BeerDBHandler extends SQLiteOpenHelper{
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_TYPE = "type";
     private static final String COLUMN_BREWERY = "brewery";
-    private static final String COLUMN_IMAGEPATH = "image path";
     private static final String COLUMN_STARS = "stars";
     private static final String COLUMN_RATING = "rating";
     private static final String COLUMN_DESCRIPTION = "description";
@@ -38,7 +37,6 @@ public class BeerDBHandler extends SQLiteOpenHelper{
                 COLUMN_NAME  + " TEXT " +
                 COLUMN_TYPE + " TEXT " +
                 COLUMN_BREWERY  + " TEXT " +
-                COLUMN_IMAGEPATH  + " TEXT " +
                 COLUMN_STARS  + " INTEGER " +
                 COLUMN_RATING + " NUMERIC " +
                 COLUMN_DESCRIPTION  + " TEXT " +
@@ -61,7 +59,6 @@ public class BeerDBHandler extends SQLiteOpenHelper{
         values.put(COLUMN_NAME, entry.getName());
         values.put(COLUMN_TYPE, entry.getType());
         values.put(COLUMN_BREWERY, entry.getBrewery());
-        values.put(COLUMN_IMAGEPATH, entry.getImagePath());
         values.put(COLUMN_STARS, entry.getStars());
         values.put(COLUMN_RATING, entry.getRating());
         values.put(COLUMN_DESCRIPTION, entry.getDescription());

@@ -1,5 +1,6 @@
 package com.thebeerdudes.thacher.roughdraught;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
     protected ArrayList<Beer> beersList;
     protected ListView lvMain;
     protected MenuItem btnSort;
+    private final int ADD_BEER = 1;
+    private final int EDIT_BEER = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,21 @@ public class MainActivity extends AppCompatActivity {
         Collections.sort(beersList);
         BeerAdapter adapter = new BeerAdapter(this, R.layout.beer_item, beersList);
         lvMain.setAdapter(adapter);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case (ADD_BEER) : {
+                if (resultCode == Activity.RESULT_OK) {
+                    // TODO Extract the data returned from the child Activity.
+                    Beer beer = (Beer)data.getSerializableExtra("Beer");
+
+                }
+                break;
+            }
+        }
     }
 
     @Override

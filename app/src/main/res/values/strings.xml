@@ -2,5 +2,5 @@
     <string name="app_name">Rough Draught</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-
+    <string name="add_name">Add Beer</string>
 </resources>

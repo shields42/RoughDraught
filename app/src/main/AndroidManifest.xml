@@ -19,7 +19,8 @@
         <activity android:name=".EditBeerActivity" />
         <activity android:name=".AddBeerActivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:label="@string/add_name">
         </activity>
     </application>
 
