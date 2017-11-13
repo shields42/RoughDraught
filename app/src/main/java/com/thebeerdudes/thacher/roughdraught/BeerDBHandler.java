@@ -19,6 +19,8 @@ public class BeerDBHandler extends SQLiteOpenHelper{
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_TYPE = "type";
+    private static final String COLUMN_STYLE = "style";
+    private static final String COLUMN_ICON = "icon";
     private static final String COLUMN_BREWERY = "brewery";
     private static final String COLUMN_STARS = "stars";
     private static final String COLUMN_RATING = "rating";
@@ -30,12 +32,18 @@ public class BeerDBHandler extends SQLiteOpenHelper{
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
+    public BeerDBHandler(Context context) {
+        super(context, DATABASE_NAME, null, 1);
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_BEERS + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" +
                 COLUMN_NAME  + " TEXT " +
                 COLUMN_TYPE + " TEXT " +
+                COLUMN_STYLE + " TEXT " +
+                COLUMN_ICON + " INTEGER " +
                 COLUMN_BREWERY  + " TEXT " +
                 COLUMN_STARS  + " INTEGER " +
                 COLUMN_RATING + " NUMERIC " +
@@ -58,6 +66,8 @@ public class BeerDBHandler extends SQLiteOpenHelper{
         SQLiteDatabase db = getWritableDatabase();
         values.put(COLUMN_NAME, entry.getName());
         values.put(COLUMN_TYPE, entry.getType());
+        values.put(COLUMN_STYLE, entry.getStyle());
+        values.put(COLUMN_ICON, entry.getIcon());
         values.put(COLUMN_BREWERY, entry.getBrewery());
         values.put(COLUMN_STARS, entry.getStars());
         values.put(COLUMN_RATING, entry.getRating());

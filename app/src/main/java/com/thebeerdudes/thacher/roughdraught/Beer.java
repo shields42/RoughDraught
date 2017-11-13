@@ -6,10 +6,9 @@ package com.thebeerdudes.thacher.roughdraught;
 
 public class Beer implements Comparable<Beer>{
     protected String name;
+    protected String brewery;
     protected String type;
     protected String style;
-    protected String brewery;
-    protected String imagePath;
     protected int    icon;
     protected int    stars;
     protected long   rating;
@@ -34,12 +33,11 @@ public class Beer implements Comparable<Beer>{
 
     }
 
-    public Beer(String name, String type, String style, String brewery, String imagePath, int icon, int stars, long rating, String description, String location, String date) {
+    public Beer(String name, String type, String style, String brewery, int icon, int stars, long rating, String description, String location, String date) {
         this.name = name;
         this.type = type;
         this.style = style;
         this.brewery = brewery;
-        this.imagePath = imagePath;
         this.icon = icon;
         this.stars = stars;
         this.rating = rating;
@@ -92,14 +90,6 @@ public class Beer implements Comparable<Beer>{
 
     public void setBrewery(String brewery) {
         this.brewery = brewery;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
     }
 
     public int getIcon(){

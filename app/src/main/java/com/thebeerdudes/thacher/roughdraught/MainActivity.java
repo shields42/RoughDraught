@@ -20,11 +20,15 @@ public class MainActivity extends AppCompatActivity {
     private final int ADD_BEER = 1;
     private final int EDIT_BEER = 0;
 
+    BeerDBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dbHandler = new BeerDBHandler(getApplicationContext());
+
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -34,18 +38,22 @@ public class MainActivity extends AppCompatActivity {
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         beersList = new ArrayList<>();
-        beersList.add(new Beer("Cavu", "Ale", "Blonde Ale", "NoDa Brewing Company", "missing", 3, 5, 100, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("Corona Extra", "Lager", "Mexican Lager", "Modelo", "missing", 1, 3, 68, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("Sierra Nevada Pale Ale", "Ale", "Pale Ale", "Sierra Nevada", "missing", 2, 5, 95, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("Bud Light", "Ale", "Piss Water", "Budweiser", "missing", 1, 1, 12, "It's bad.", "missing", "missing"));
-        beersList.add(new Beer("Pabst Blue Ribbon", "Lager", "Mexican Lager", "PBR", "missing", 1, 1, 8, "It's gross.", "missing", "missing"));
-        beersList.add(new Beer("Torpedo Extra", "Ale", "Extra IPA", "Sierra Nevada", "missing", 1, 4, 88, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("Hop Drop 'n Roll", "Ale", "IPA", "NoDa Brewing Company", "missing", 3, 5, 95, "It's a great beer.", "missing", "missing"));
-        beersList.add(new Beer("Celebration Ale", "Ale", "Christmas Ale", "Sierra Nevada", "missing", 3, 4, 87, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("Tropical IPA", "Ale", "West Coast IPA", "Sierra Nevada", "missing", 2, 4, 83, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("OMB Copper", "Ale", "German Altbeir", "Olde Mecklenburg Brewing", "missing", 1, 4, 87, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("Oktoberfest", "Lager", "Oktoberfest Lager", "Sierra Nevada", "missing", 1, 4, 84, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("Kukumber Kolsch", "Ale", "Kolsch", "NoDa Brewing Company", "missing", 1, 3, 71, "It's a good beer.", "missing", "missing"));
+        beersList.add(new Beer("Cavu", "Ale", "Blonde Ale", "NoDa Brewing Company", 3, 5, 100, "It's a good beer.", "missing", "missing"));
+        beersList.add(new Beer("Corona Extra", "Lager", "Mexican Lager", "Modelo", 1, 3, 68, "It's a good beer.", "missing", "missing"));
+        beersList.add(new Beer("Sierra Nevada Pale Ale", "Ale", "Pale Ale", "Sierra Nevada", 2, 5, 95, "It's a good beer.", "missing", "missing"));
+        beersList.add(new Beer("Bud Light", "Ale", "Piss Water", "Budweiser", 1, 1, 12, "It's bad.", "missing", "missing"));
+        beersList.add(new Beer("Pabst Blue Ribbon", "Lager", "Mexican Lager", "PBR", 1, 1, 8, "It's gross.", "missing", "missing"));
+        beersList.add(new Beer("Torpedo Extra", "Ale", "Extra IPA", "Sierra Nevada", 1, 4, 88, "It's a good beer.", "missing", "missing"));
+        beersList.add(new Beer("Hop Drop 'n Roll", "Ale", "IPA", "NoDa Brewing Company", 3, 5, 95, "It's a great beer.", "missing", "missing"));
+        beersList.add(new Beer("Celebration Ale", "Ale", "Christmas Ale", "Sierra Nevada", 3, 4, 87, "It's a good beer.", "missing", "missing"));
+        beersList.add(new Beer("Tropical IPA", "Ale", "West Coast IPA", "Sierra Nevada", 2, 4, 83, "It's a good beer.", "missing", "missing"));
+        beersList.add(new Beer("OMB Copper", "Ale", "German Altbeir", "Olde Mecklenburg Brewing", 1, 4, 87, "It's a good beer.", "missing", "missing"));
+        beersList.add(new Beer("Oktoberfest", "Lager", "Oktoberfest Lager", "Sierra Nevada", 1, 4, 84, "It's a good beer.", "missing", "missing"));
+        beersList.add(new Beer("Kukumber Kolsch", "Ale", "Kolsch", "NoDa Brewing Company", 1, 3, 71, "It's a good beer.", "missing", "missing"));
+
+        dbHandler.addBeer(beersList.get(1));
+
+
         Collections.sort(beersList);
         BeerAdapter adapter = new BeerAdapter(this, R.layout.beer_item, beersList);
         lvMain.setAdapter(adapter);
