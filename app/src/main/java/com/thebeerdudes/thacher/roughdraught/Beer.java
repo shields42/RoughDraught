@@ -4,60 +4,38 @@ package com.thebeerdudes.thacher.roughdraught;
  * Created by thach on 10/24/2017.
  */
 
-public class Beer implements Comparable<Beer>{
+public class Beer implements Comparable<Beer> {
     protected String name;
     protected String brewery;
-    protected String type;
     protected String style;
-    protected int    icon;
-    protected int    stars;
-    protected long   rating;
+    protected double abv;
+    protected int ibu;
+    protected long rating;
     protected String description;
-    protected String location;
-    protected String _date;
-    protected int    _id;
+    protected int _id;
 
     @Override
-    public int compareTo(Beer b){
-        if(this.getRating()>b.getRating()){
+    public int compareTo(Beer b) {
+        if (this.getRating() > b.getRating()) {
             return -1;
-        }
-        else if(this.getRating()==b.getRating()){
+        } else if (this.getRating() == b.getRating()) {
             return 0;
-        }
-        else
+        } else
             return 1;
     }
 
-    public Beer(){
+    public Beer() {
 
     }
 
-    public Beer(String name, String type, String style, String brewery, int icon, int stars, long rating, String description, String location, String date) {
+    public Beer(String name, String brewery, String style, double abv, int ibu, long rating, String description) {
         this.name = name;
-        this.type = type;
-        this.style = style;
         this.brewery = brewery;
-        this.icon = icon;
-        this.stars = stars;
+        this.style = style;
+        this.abv = abv;
+        this.ibu = ibu;
         this.rating = rating;
         this.description = description;
-        this.location = location;
-        this._date = date;
-    }
-    public void set_date(String _date) {
-        this._date = _date;
-    }
-
-    public String get_date() {
-        return _date;
-    }
-    public void set_id(int _id) {
-        this._id = _id;
-    }
-
-    public int get_id() {
-        return _id;
     }
 
     public String getName() {
@@ -68,12 +46,12 @@ public class Beer implements Comparable<Beer>{
         this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getBrewery() {
+        return brewery;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setBrewery(String brewery) {
+        this.brewery = brewery;
     }
 
     public String getStyle() {
@@ -84,28 +62,20 @@ public class Beer implements Comparable<Beer>{
         this.style = style;
     }
 
-    public String getBrewery() {
-        return brewery;
+    public double getAbv() {
+        return abv;
     }
 
-    public void setBrewery(String brewery) {
-        this.brewery = brewery;
+    public void setAbv(double abv) {
+        this.abv = abv;
     }
 
-    public int getIcon(){
-        return this.icon;
+    public int getIbu() {
+        return ibu;
     }
 
-    public void setIcon(int icon){
-        this.icon = icon;
-    }
-
-    public int getStars() {
-        return stars;
-    }
-
-    public void setStars(int stars) {
-        this.stars = stars;
+    public void setIbu(int ibu) {
+        this.ibu = ibu;
     }
 
     public long getRating() {
@@ -124,17 +94,11 @@ public class Beer implements Comparable<Beer>{
         this.description = description;
     }
 
-    public String getLocation() {
-        return location;
+    public int get_id() {
+        return _id;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public int getRatingAsInt(){
-        long l = this.getRating() * 100;
-        int i = (int) l;
-        return i;
+    public void set_id(int _id) {
+        this._id = _id;
     }
 }

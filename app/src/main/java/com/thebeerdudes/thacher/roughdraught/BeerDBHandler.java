@@ -12,21 +12,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class BeerDBHandler extends SQLiteOpenHelper{
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String DATABASE_NAME = "beerjournal.db";
     private static final String TABLE_BEERS = "Beers";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "name";
-    private static final String COLUMN_TYPE = "type";
-    private static final String COLUMN_STYLE = "style";
-    private static final String COLUMN_ICON = "icon";
     private static final String COLUMN_BREWERY = "brewery";
-    private static final String COLUMN_STARS = "stars";
+    private static final String COLUMN_STYLE = "style";
     private static final String COLUMN_RATING = "rating";
     private static final String COLUMN_DESCRIPTION = "description";
-    private static final String COLUMN_LOCATION = "location";
-    private static final String COLUMN_DATE = "date";
 
     public BeerDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -39,17 +34,12 @@ public class BeerDBHandler extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_BEERS + "(" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT " +
                 COLUMN_NAME  + " TEXT " +
-                COLUMN_TYPE + " TEXT " +
                 COLUMN_STYLE + " TEXT " +
-                COLUMN_ICON + " INTEGER " +
                 COLUMN_BREWERY  + " TEXT " +
-                COLUMN_STARS  + " INTEGER " +
                 COLUMN_RATING + " NUMERIC " +
-                COLUMN_DESCRIPTION  + " TEXT " +
-                COLUMN_LOCATION  + " TEXT " +
-                COLUMN_DATE + " TEXT "
+                COLUMN_DESCRIPTION  + " TEXT "
                 + ");";
         db.execSQL(query);
 
@@ -65,15 +55,10 @@ public class BeerDBHandler extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         SQLiteDatabase db = getWritableDatabase();
         values.put(COLUMN_NAME, entry.getName());
-        values.put(COLUMN_TYPE, entry.getType());
         values.put(COLUMN_STYLE, entry.getStyle());
-        values.put(COLUMN_ICON, entry.getIcon());
         values.put(COLUMN_BREWERY, entry.getBrewery());
-        values.put(COLUMN_STARS, entry.getStars());
         values.put(COLUMN_RATING, entry.getRating());
         values.put(COLUMN_DESCRIPTION, entry.getDescription());
-        values.put(COLUMN_LOCATION, entry.getLocation());
-        values.put(COLUMN_DATE, entry.get_date());
         db.insert(TABLE_BEERS, null, values);
     }
 

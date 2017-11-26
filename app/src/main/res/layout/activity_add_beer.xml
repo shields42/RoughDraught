@@ -20,7 +20,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity" >
+        tools:context=".MainActivity">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                 android:id="@+id/txtName"
                 style="@android:style/Widget.DeviceDefault.Light.EditText"
                 android:layout_width="256dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="32dp"
@@ -59,7 +59,7 @@
                 android:id="@+id/txtBrewery"
                 style="@android:style/Widget.DeviceDefault.Light.EditText"
                 android:layout_width="256dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
@@ -70,33 +70,82 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
-            <RatingBar
-                android:id="@+id/rbStars"
-                style="@style/Widget.AppCompat.RatingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="57dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:numStars="5"
-                android:stepSize="1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtBrewery" />
-
             <EditText
                 android:id="@+id/txtAbv"
-                android:layout_width="256dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="112dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
                 android:ems="10"
                 android:hint="% ABV"
                 android:inputType="numberDecimal"
+                app:layout_constraintStart_toStartOf="@+id/txtRating"
+                app:layout_constraintTop_toBottomOf="@+id/txtBrewery" />
+
+            <EditText
+                android:id="@+id/txtIbu"
+                android:layout_width="112dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="IBU"
+                android:inputType="numberDecimal"
+                app:layout_constraintEnd_toEndOf="@+id/txtRating"
+                app:layout_constraintTop_toBottomOf="@+id/txtBrewery" />
+
+            <EditText
+                android:id="@+id/txtRating"
+                android:layout_width="256dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="Rating"
+                android:inputType="numberDecimal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rbStars" />
+                app:layout_constraintTop_toBottomOf="@+id/txtIbu" />
+
+            <EditText
+                android:id="@+id/txtStyle"
+                android:layout_width="256dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="Style"
+                android:inputType="numberDecimal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtRating" />
+
+            <EditText
+                android:id="@+id/txtDescription"
+                android:layout_width="256dp"
+                android:layout_height="96dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:gravity="left"
+                android:hint="Description"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtStyle" />
+
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="256dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Add Beer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

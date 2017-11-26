@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Adapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
     protected ListView lvMain;
     protected MenuItem btnSort;
     private final int ADD_BEER = 1;
-    private final int EDIT_BEER = 0;
+    private final int EDIT_BEER = 2;
+    private final int SORT = 3;
 
     BeerDBHandler dbHandler;
 
@@ -38,20 +41,14 @@ public class MainActivity extends AppCompatActivity {
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         beersList = new ArrayList<>();
-        beersList.add(new Beer("Cavu", "Ale", "Blonde Ale", "NoDa Brewing Company", 3, 5, 100, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("Corona Extra", "Lager", "Mexican Lager", "Modelo", 1, 3, 68, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("Sierra Nevada Pale Ale", "Ale", "Pale Ale", "Sierra Nevada", 2, 5, 95, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("Bud Light", "Ale", "Piss Water", "Budweiser", 1, 1, 12, "It's bad.", "missing", "missing"));
-        beersList.add(new Beer("Pabst Blue Ribbon", "Lager", "Mexican Lager", "PBR", 1, 1, 8, "It's gross.", "missing", "missing"));
-        beersList.add(new Beer("Torpedo Extra", "Ale", "Extra IPA", "Sierra Nevada", 1, 4, 88, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("Hop Drop 'n Roll", "Ale", "IPA", "NoDa Brewing Company", 3, 5, 95, "It's a great beer.", "missing", "missing"));
-        beersList.add(new Beer("Celebration Ale", "Ale", "Christmas Ale", "Sierra Nevada", 3, 4, 87, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("Tropical IPA", "Ale", "West Coast IPA", "Sierra Nevada", 2, 4, 83, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("OMB Copper", "Ale", "German Altbeir", "Olde Mecklenburg Brewing", 1, 4, 87, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("Oktoberfest", "Lager", "Oktoberfest Lager", "Sierra Nevada", 1, 4, 84, "It's a good beer.", "missing", "missing"));
-        beersList.add(new Beer("Kukumber Kolsch", "Ale", "Kolsch", "NoDa Brewing Company", 1, 3, 71, "It's a good beer.", "missing", "missing"));
+        beersList.add(new Beer("Celebration Ale", "Sierra Nevada", "IPA", 7.7, 0, 82, "I like it"));
+        beersList.add(new Beer("Torpedo Extra", "Sierra Nevada", "Double IPA", 7.7, 37, 85, "I like it"));
+        beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 97, "I like it"));
+        beersList.add(new Beer("Hop Drop n Roll", "NoDa Brewing Company", "IPA", 6.8, 12, 96, "I like it"));
+        beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
+        beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
 
-        dbHandler.addBeer(beersList.get(1));
+        //dbHandler.addBeer(beersList.get(1));
 
 
         Collections.sort(beersList);
@@ -62,15 +59,51 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        System.out.println("Request code: " + requestCode + "\nResult Code: " + resultCode);
         switch(requestCode) {
-            case (ADD_BEER) : {
+            case (ADD_BEER):
                 if (resultCode == Activity.RESULT_OK) {
                     // TODO Extract the data returned from the child Activity.
                     Beer beer = (Beer)data.getSerializableExtra("Beer");
-
+                    ArrayList<Beer> newList = new ArrayList<>();
                 }
                 break;
-            }
+
+            case (SORT):
+                //Sort by Rating
+                if(resultCode == 1){
+                    Collections.sort(beersList,new Comparator<Beer>(){
+                        @Override
+                        public int compare(Beer currentBeer, Beer newBeer) {
+                            if(currentBeer.getRating()<newBeer.getRating()){
+                                return 1;
+                            }
+                            else if(currentBeer.getRating()==newBeer.getRating()){
+                                return (currentBeer.getName().compareTo(newBeer.getName()));
+                            }
+                            else{
+                                return -1;
+                            }
+                        }
+                    });
+
+                }
+                //Sort by Name
+                else if(resultCode==2){
+                    Collections.sort(beersList,new Comparator<Beer>(){
+                        @Override
+                        public int compare(Beer currentBeer, Beer newBeer) {
+                            System.out.println(beersList);
+                            return currentBeer.getName().compareTo(newBeer.getName());
+                        }
+                    });
+
+                }
+                //Reset List Adapter
+                BeerAdapter adapter = new BeerAdapter(MainActivity.this, R.layout.beer_item, beersList);
+                lvMain.setAdapter(adapter);
+            break;
         }
     }
 
@@ -82,14 +115,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        Intent intent;
+
         switch (item.getItemId()) {
+
             case R.id.action_settings:
                 // User chose the "Settings" item, show the app settings UI...
                 return true;
 
             case R.id.action_add:
-                Intent intent=  new Intent(MainActivity.this, AddBeerActivity.class);
-                startActivityForResult(intent, 1);
+                intent =  new Intent(MainActivity.this, AddBeerActivity.class);
+                startActivityForResult(intent, ADD_BEER);
+                return true;
+
+            case R.id.action_sort:
+                intent=  new Intent(MainActivity.this, SortActivity.class);
+                startActivityForResult(intent, SORT);
                 return true;
 
             default:

@@ -40,26 +40,10 @@ public class BeerAdapter extends ArrayAdapter<Beer> {
         TextView lblName = (TextView)convertView.findViewById(R.id.lblBeerName);
         TextView lblBrewery = (TextView)convertView.findViewById(R.id.lblBrewery);
         TextView lblRating = (TextView)convertView.findViewById(R.id.lblRating);
-        ImageView imgBeer = (ImageView)convertView.findViewById(R.id.imgBeerItem);
 
         lblName.setText(beer.getName());
         lblBrewery.setText(beer.getBrewery());
         lblRating.setText(Long.toString(beer.getRating()));
-
-        switch  (beer.getIcon()){
-            case 1:
-                imgBeer.setImageResource(R.drawable.light2);
-                break;
-            case 2:
-                imgBeer.setImageResource(R.drawable.light3);
-                break;
-            case 3:
-                imgBeer.setImageResource(R.drawable.light4);
-                break;
-            default:
-                break;
-
-        }
 
         if(beer.getRating()>=90){
             lblRating.setTextColor(Color.parseColor("#2196f3"));

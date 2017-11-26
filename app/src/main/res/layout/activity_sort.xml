@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context="com.thebeerdudes.thacher.roughdraught.SortActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_addbeertoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        app:titleTextColor="@color/colorTextLight"
+        android:theme="@style/ThemeToolbar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        app:layout_constraintTop_toBottomOf="@id/my_addbeertoolbar">
+
+        <Button
+            android:id="@+id/btnRatingSort"
+            android:layout_width="256dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Rating"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnNameSort"
+            android:layout_width="256dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnRatingSort" />
+
+        <Button
+            android:id="@+id/btnBrewerySort"
+            android:layout_width="256dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Brewery"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnNameSort" />
+
+        <Button
+            android:id="@+id/btnAbvSort"
+            android:layout_width="122dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:text="ABV"
+            app:layout_constraintStart_toStartOf="@+id/btnBrewerySort"
+            app:layout_constraintTop_toBottomOf="@+id/btnBrewerySort" />
+
+        <Button
+            android:id="@+id/btnIbuSort"
+            android:layout_width="122dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:text="IBU"
+            app:layout_constraintEnd_toEndOf="@+id/btnBrewerySort"
+            app:layout_constraintTop_toBottomOf="@+id/btnBrewerySort" />
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

@@ -17,11 +17,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".EditBeerActivity" />
-        <activity android:name=".AddBeerActivity"
+        <activity
+            android:name=".AddBeerActivity"
+            android:label="@string/add_name"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:label="@string/add_name">
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".SortActivity"></activity>
     </application>
 
 </manifest>
