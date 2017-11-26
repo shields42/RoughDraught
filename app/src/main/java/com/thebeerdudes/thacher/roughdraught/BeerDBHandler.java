@@ -46,8 +46,9 @@ public class BeerDBHandler extends SQLiteOpenHelper{
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP_TABLE_IF_EXISTS " + TABLE_BEERS);
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int NewVersion) {
+        String query = "DROP TABLE IF EXISTS" + TABLE_BEERS;
+        db.execSQL(query);
         onCreate(db);
     }
 
@@ -102,4 +103,90 @@ public class BeerDBHandler extends SQLiteOpenHelper{
         db.close();
         return dbString;
     }
+    public String selectBeerID(String beerID) {
+        String dbString = "";
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_BEERS + " WHERE " + COLUMN_NAME + " = " + beerID;
+        Cursor c = db.rawQuery(query, null);
+        c.moveToFirst();
+        while(!c.isAfterLast()) {
+            if (c.getString(c.getColumnIndex("beerID") )!= null) {
+                dbString += c.getString(c.getColumnIndex("beerID"));
+            }
+        }
+        c.close();
+
+        db.close();
+        return dbString;
+    }
+
+    public String selectBeerLocation(String beerLocation) {
+        String dbString = "";
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_BEERS + " WHERE " + COLUMN_NAME + " = " + beerLocation;
+        Cursor c = db.rawQuery(query, null);
+        c.moveToFirst();
+        while(!c.isAfterLast()) {
+            if (c.getString(c.getColumnIndex("beerLocation") )!= null) {
+                dbString += c.getString(c.getColumnIndex("beerLocation"));
+            }
+        }
+        c.close();
+
+        db.close();
+        return dbString;
+    }
+
+    public String selectBeerRating(Long beerRating) {
+        String dbString = "";
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_BEERS + " WHERE " + COLUMN_NAME + " = " + beerRating;
+        Cursor c = db.rawQuery(query, null);
+        c.moveToFirst();
+        while(!c.isAfterLast()) {
+            if (c.getString(c.getColumnIndex("beerRating") )!= null) {
+                dbString += c.getString(c.getColumnIndex("beerRating"));
+            }
+        }
+        c.close();
+
+        db.close();
+        return dbString;
+    }
+
+    public String selectBeerType(String beerType) {
+        String dbString = "";
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_BEERS + " WHERE " + COLUMN_NAME + " = " + beerType;
+        Cursor c = db.rawQuery(query, null);
+        c.moveToFirst();
+        while(!c.isAfterLast()) {
+            if (c.getString(c.getColumnIndex("beerType") )!= null) {
+                dbString += c.getString(c.getColumnIndex("beerType"));
+            }
+        }
+        c.close();
+
+        db.close();
+        return dbString;
+    }
+
+    public String selectBeerStyle(String beerStyle) {
+        String dbString = "";
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_BEERS + " WHERE " + COLUMN_NAME + " = " + beerStyle;
+        Cursor c = db.rawQuery(query, null);
+        c.moveToFirst();
+        while(!c.isAfterLast()) {
+            if (c.getString(c.getColumnIndex("beerStyle") )!= null) {
+                dbString += c.getString(c.getColumnIndex("beerID"));
+            }
+        }
+        c.close();
+
+        db.close();
+        return dbString;
+    }
+
+
 }
