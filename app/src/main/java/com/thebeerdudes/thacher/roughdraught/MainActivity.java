@@ -71,12 +71,13 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode == Activity.RESULT_OK) {
                     Beer beer = (Beer)data.getSerializableExtra("Beer");
 
-                    ArrayList<Beer> newList = new ArrayList<>();
+                    beersList = new ArrayList<>();
 
                     //Push beer to table
                     //Pull table into ArrayList<Beer> newList
 
-                    BeerAdapter adapter = new BeerAdapter(MainActivity.this, R.layout.beer_item, newList);
+                    Collections.sort(beersList);
+                    BeerAdapter adapter = new BeerAdapter(MainActivity.this, R.layout.beer_item, beersList);
                     lvMain.setAdapter(adapter);
                 }
                 break;
