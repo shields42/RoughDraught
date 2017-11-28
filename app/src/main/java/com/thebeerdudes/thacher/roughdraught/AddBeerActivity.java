@@ -15,6 +15,8 @@ import java.io.Serializable;
 
 public class AddBeerActivity extends AppCompatActivity {
 
+    protected Beer beer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +37,12 @@ public class AddBeerActivity extends AppCompatActivity {
         final TextView txtRating = (TextView)findViewById(R.id.txtRating);
         final TextView txtDescription = (TextView)findViewById(R.id.txtDescription);
 
-        final Beer beer = null;
+        beer = null;
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                beer = new Beer();
                 beer.setName(txtName.getText().toString());
                 beer.setBrewery(txtBrewery.getText().toString());
                 beer.setStyle(txtStyle.getText().toString());
@@ -51,7 +53,7 @@ public class AddBeerActivity extends AppCompatActivity {
 
                 Intent i = getIntent();
                 i.putExtra("Beer", (Serializable)beer);
-                setResult(1, i);
+                setResult(RESULT_OK, i);
                 finish();
             }
         });

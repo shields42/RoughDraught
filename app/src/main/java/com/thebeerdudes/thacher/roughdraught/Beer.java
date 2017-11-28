@@ -1,10 +1,13 @@
 package com.thebeerdudes.thacher.roughdraught;
 
+import java.io.Serializable;
+
 /**
  * Created by thach on 10/24/2017.
  */
 
-public class Beer implements Comparable<Beer> {
+
+public class Beer implements Comparable<Beer>, Serializable{
     protected String name;
     protected String brewery;
     protected String style;

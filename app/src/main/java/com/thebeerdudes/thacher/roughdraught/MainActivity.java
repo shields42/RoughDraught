@@ -1,7 +1,10 @@
 package com.thebeerdudes.thacher.roughdraught;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.Adapter;
 import android.widget.ListView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private final int EDIT_BEER = 2;
     private final int SORT = 3;
 
+    private TinyDB tinyDB = null;
+
     BeerDBHandler dbHandler;
 
     @Override
@@ -32,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         dbHandler = new BeerDBHandler(getApplicationContext());
 
+        tinyDB = new TinyDB(this);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -41,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         beersList = new ArrayList<>();
+
+        beersList = getBeersList();
+
+        //Pull table into list
+
+        /*
         beersList.add(new Beer("Celebration Ale", "Sierra Nevada", "IPA", 7.7, 0, 82, "I like it"));
         beersList.add(new Beer("Torpedo Extra", "Sierra Nevada", "Double IPA", 7.7, 37, 85, "I like it"));
         beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 97, "I like it"));
@@ -53,7 +66,9 @@ public class MainActivity extends AppCompatActivity {
         beersList.add(new Beer("Hop Drop n Roll", "NoDa Brewing Company", "IPA", 6.8, 12, 96, "I like it"));
         beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
         beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
-        //dbHandler.addBeer(beersList.get(1));
+
+        updateDB(beersList);
+        */
 
 
         Collections.sort(beersList);
@@ -68,10 +83,13 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("Request code: " + requestCode + "\nResult Code: " + resultCode);
         switch(requestCode) {
             case (ADD_BEER):
-                if (resultCode == Activity.RESULT_OK) {
+                if (resultCode == RESULT_OK) {
                     Beer beer = (Beer)data.getSerializableExtra("Beer");
 
-                    beersList = new ArrayList<>();
+                    System.out.println("Adding " + beer.getName() + " to database");
+
+                    beersList.add(beer);
+                    updateDB(beersList);
 
                     //Push beer to table
                     //Pull table into ArrayList<Beer> newList
@@ -152,6 +170,18 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    public void updateDB(ArrayList<Beer> list){
+        System.out.println("Updating preferences..");
+        tinyDB.putListObject("Beers", list);
+        System.out.println("Preferences updated!");
+    }
+
+    public ArrayList<Beer> getBeersList(){
+        System.out.println("Getting data...");
+        System.out.println("Data found!");
+        return tinyDB.getListObject("Beers", Beer.class);
     }
 
 
