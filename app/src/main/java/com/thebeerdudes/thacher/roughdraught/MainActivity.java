@@ -47,7 +47,12 @@ public class MainActivity extends AppCompatActivity {
         beersList.add(new Beer("Hop Drop n Roll", "NoDa Brewing Company", "IPA", 6.8, 12, 96, "I like it"));
         beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
         beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
-
+        beersList.add(new Beer("Hop Drop n Roll", "NoDa Brewing Company", "IPA", 6.8, 12, 96, "I like it"));
+        beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
+        beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
+        beersList.add(new Beer("Hop Drop n Roll", "NoDa Brewing Company", "IPA", 6.8, 12, 96, "I like it"));
+        beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
+        beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
         //dbHandler.addBeer(beersList.get(1));
 
 
@@ -64,9 +69,11 @@ public class MainActivity extends AppCompatActivity {
         switch(requestCode) {
             case (ADD_BEER):
                 if (resultCode == Activity.RESULT_OK) {
-                    // TODO Extract the data returned from the child Activity.
                     Beer beer = (Beer)data.getSerializableExtra("Beer");
+
                     ArrayList<Beer> newList = new ArrayList<>();
+                    BeerAdapter adapter = new BeerAdapter(MainActivity.this, R.layout.beer_item, newList);
+                    lvMain.setAdapter(adapter);
                 }
                 break;
 

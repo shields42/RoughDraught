@@ -1,11 +1,17 @@
 package com.thebeerdudes.thacher.roughdraught;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import java.io.Serializable;
 
 public class AddBeerActivity extends AppCompatActivity {
 
@@ -19,6 +25,36 @@ public class AddBeerActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        Button btnAdd = (Button)findViewById(R.id.btnSubmit);
+        final TextView txtName = (TextView)findViewById(R.id.txtName);
+        final TextView txtBrewery = (TextView)findViewById(R.id.txtBrewery);
+        final TextView txtStyle = (TextView)findViewById(R.id.txtStyle);
+        final TextView txtAbv = (TextView)findViewById(R.id.txtAbv);
+        final TextView txtIbu = (TextView)findViewById(R.id.txtIbu);
+        final TextView txtRating = (TextView)findViewById(R.id.txtRating);
+        final TextView txtDescription = (TextView)findViewById(R.id.txtDescription);
+
+        final Beer beer = null;
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                beer.setName(txtName.getText().toString());
+                beer.setBrewery(txtBrewery.getText().toString());
+                beer.setStyle(txtStyle.getText().toString());
+                beer.setAbv(Double.parseDouble(txtAbv.getText().toString()));
+                beer.setIbu(Integer.parseInt(txtIbu.getText().toString()));
+                beer.setRating(Long.parseLong(txtRating.getText().toString()));
+                beer.setDescription(txtDescription.getText().toString());
+
+                Intent i = getIntent();
+                i.putExtra("Beer", (Serializable)beer);
+                setResult(1, i);
+                finish();
+            }
+        });
 
     }
 
