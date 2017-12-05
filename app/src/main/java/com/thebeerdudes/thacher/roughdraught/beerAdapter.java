@@ -8,12 +8,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -38,8 +34,8 @@ public class BeerAdapter extends ArrayAdapter<Beer> {
         }
 
         TextView lblName = (TextView)convertView.findViewById(R.id.lblBeerName);
-        TextView lblBrewery = (TextView)convertView.findViewById(R.id.lblBrewery);
-        TextView lblRating = (TextView)convertView.findViewById(R.id.lblRating);
+        TextView lblBrewery = (TextView)convertView.findViewById(R.id.lblDetailBrewery);
+        TextView lblRating = (TextView)convertView.findViewById(R.id.lblDetailRating);
 
         lblName.setText(beer.getName());
         lblBrewery.setText(beer.getBrewery());

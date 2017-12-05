@@ -28,16 +28,27 @@ public class AddBeerActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        Button btnAdd = (Button)findViewById(R.id.btnSubmit);
-        final TextView txtName = (TextView)findViewById(R.id.txtName);
-        final TextView txtBrewery = (TextView)findViewById(R.id.txtBrewery);
-        final TextView txtStyle = (TextView)findViewById(R.id.txtStyle);
-        final TextView txtAbv = (TextView)findViewById(R.id.txtAbv);
-        final TextView txtIbu = (TextView)findViewById(R.id.txtIbu);
-        final TextView txtRating = (TextView)findViewById(R.id.txtRating);
-        final TextView txtDescription = (TextView)findViewById(R.id.txtDescription);
+        Button btnAdd = (Button) findViewById(R.id.btnSubmit);
+        final TextView txtName = (TextView) findViewById(R.id.txtName);
+        final TextView txtBrewery = (TextView) findViewById(R.id.txtBrewery);
+        final TextView txtStyle = (TextView) findViewById(R.id.txtStyle);
+        final TextView txtAbv = (TextView) findViewById(R.id.txtAbv);
+        final TextView txtIbu = (TextView) findViewById(R.id.txtIbu);
+        final TextView txtRating = (TextView) findViewById(R.id.txtRating);
+        final TextView txtDescription = (TextView) findViewById(R.id.txtDescription);
 
         beer = null;
+
+        if (getIntent().getSerializableExtra("edit beer") != null){
+            Beer editBeer = (Beer)getIntent().getSerializableExtra("edit beer");
+            txtName.setText(editBeer.getName());
+            txtBrewery.setText(editBeer.getBrewery());
+            txtRating.setText(String.valueOf(editBeer.getRating()));
+            txtAbv.setText(String.valueOf(editBeer.getAbv()));
+            txtIbu.setText(String.valueOf(editBeer.getIbu()));
+            txtStyle.setText(editBeer.getStyle());
+            txtDescription.setText(editBeer.getDescription());
+        }
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +87,7 @@ public class AddBeerActivity extends AppCompatActivity {
     {
         switch (menuItem.getItemId()) {
             case android.R.id.home:
+                setResult(RESULT_CANCELED);
                 onBackPressed();
                 return true;
             default:

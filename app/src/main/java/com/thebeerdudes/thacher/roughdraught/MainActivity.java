@@ -1,7 +1,9 @@
 package com.thebeerdudes.thacher.roughdraught;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -10,10 +12,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
     private final int ADD_BEER = 1;
     private final int EDIT_BEER = 2;
     private final int SORT = 3;
+    private final int VIEW_BEER = 4;
+
+    protected int beerIndex = -1;
+
+    private int removeIndex = 0;
 
     private TinyDB tinyDB = null;
 
@@ -51,29 +61,46 @@ public class MainActivity extends AppCompatActivity {
 
         beersList = getBeersList();
 
-        //Pull table into list
-
-        /*
-        beersList.add(new Beer("Celebration Ale", "Sierra Nevada", "IPA", 7.7, 0, 82, "I like it"));
-        beersList.add(new Beer("Torpedo Extra", "Sierra Nevada", "Double IPA", 7.7, 37, 85, "I like it"));
-        beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 97, "I like it"));
-        beersList.add(new Beer("Hop Drop n Roll", "NoDa Brewing Company", "IPA", 6.8, 12, 96, "I like it"));
-        beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
-        beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
-        beersList.add(new Beer("Hop Drop n Roll", "NoDa Brewing Company", "IPA", 6.8, 12, 96, "I like it"));
-        beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
-        beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
-        beersList.add(new Beer("Hop Drop n Roll", "NoDa Brewing Company", "IPA", 6.8, 12, 96, "I like it"));
-        beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
-        beersList.add(new Beer("Cavu", "NoDa Brewing Company", "Blonde Ale", 4.5, 12, 85, "I like it"));
-
-        updateDB(beersList);
-        */
-
 
         Collections.sort(beersList);
         BeerAdapter adapter = new BeerAdapter(this, R.layout.beer_item, beersList);
         lvMain.setAdapter(adapter);
+
+        lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent detailIntent = new Intent(MainActivity.this, EditBeerActivity.class);
+                detailIntent.putExtra("beer", beersList.get(i));
+                beerIndex = i;
+                detailIntent.putExtra("beer index", i);
+                startActivityForResult(detailIntent, VIEW_BEER);
+            }
+        });
+
+        lvMain.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                removeIndex = i;
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+                alertDialog.setMessage("Would you like to remove " + beersList.get(i).getName() + " from the list?");
+                alertDialog.setTitle("Remove Entry");
+                alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        beersList.remove(removeIndex);
+                        updateDB(beersList);
+                    }
+                });
+                alertDialog.show();
+                return false;
+            }
+        });
     }
 
     @Override
@@ -130,6 +157,19 @@ public class MainActivity extends AppCompatActivity {
                     });
 
                 }
+            case (VIEW_BEER):
+                if(resultCode==10){ //Beer not edited. Only viewed.
+                    break;
+                }
+                else if(resultCode==11) {//Beer edited from activity
+                    if(beerIndex!=-1) {
+                        beersList.remove(beerIndex);
+                        beersList.add((Beer) data.getSerializableExtra("new beer"));
+                        updateDB(beersList);
+                        beerIndex=-1;
+                    }
+
+                }
                 //Reset List Adapter
                 BeerAdapter adapter = new BeerAdapter(MainActivity.this, R.layout.beer_item, beersList);
                 lvMain.setAdapter(adapter);
@@ -173,9 +213,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateDB(ArrayList<Beer> list){
+        tinyDB.remove("Beers");
         System.out.println("Updating preferences..");
         tinyDB.putListObject("Beers", list);
-        System.out.println("Preferences updated!");
+        System.out.println("Preferences updated!\nReloading List...");
+        BeerAdapter adapter = new BeerAdapter(MainActivity.this, R.layout.beer_item, beersList);
+        lvMain.setAdapter(adapter);
+        System.out.println("Adapter updated!");
     }
 
     public ArrayList<Beer> getBeersList(){
