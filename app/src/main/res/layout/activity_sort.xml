@@ -22,59 +22,143 @@
         android:layout_height="fill_parent"
         app:layout_constraintTop_toBottomOf="@id/my_addbeertoolbar">
 
-        <Button
-            android:id="@+id/btnRatingSort"
+        <TextView
+            android:id="@+id/lblSortTitle"
             android:layout_width="256dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Rating"
+            android:text="Sort"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/lblSortRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Rating"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toBottomOf="@+id/btnRatingSortA"
+            app:layout_constraintStart_toStartOf="@+id/lblSortTitle"
+            app:layout_constraintTop_toTopOf="@+id/btnRatingSortA" />
+
         <Button
-            android:id="@+id/btnNameSort"
-            android:layout_width="256dp"
+            android:id="@+id/btnRatingSortA"
+            android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:text="▲"
+            app:layout_constraintBottom_toBottomOf="@+id/btnRatingSortD"
+            app:layout_constraintEnd_toStartOf="@+id/btnRatingSortD"
+            app:layout_constraintTop_toTopOf="@+id/btnRatingSortD" />
+
+        <Button
+            android:id="@+id/btnRatingSortD"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="32dp"
+            android:text="▼"
+            app:layout_constraintEnd_toEndOf="@+id/lblSortTitle"
+            app:layout_constraintTop_toBottomOf="@+id/lblSortTitle" />
+
+        <TextView
+            android:id="@+id/lblSortName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:text="Name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnRatingSort" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toBottomOf="@+id/btnNameSortA"
+            app:layout_constraintStart_toStartOf="@+id/lblSortRating"
+            app:layout_constraintTop_toTopOf="@+id/btnNameSortA" />
 
         <Button
-            android:id="@+id/btnBrewerySort"
-            android:layout_width="256dp"
+            android:id="@+id/btnNameSortA"
+            android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:text="▲"
+            app:layout_constraintBottom_toBottomOf="@+id/btnNameSortD"
+            app:layout_constraintEnd_toStartOf="@+id/btnNameSortD"
+            app:layout_constraintTop_toTopOf="@+id/btnNameSortD" />
+
+        <Button
+            android:id="@+id/btnNameSortD"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:text="▼"
+            app:layout_constraintEnd_toEndOf="@+id/btnRatingSortD"
+            app:layout_constraintTop_toBottomOf="@+id/btnRatingSortD" />
+
+        <TextView
+            android:id="@+id/lblSortBrewery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:text="Brewery"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnNameSort" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBrewerySortA"
+            app:layout_constraintStart_toStartOf="@+id/lblSortName"
+            app:layout_constraintTop_toTopOf="@+id/btnBrewerySortA" />
 
         <Button
-            android:id="@+id/btnAbvSort"
-            android:layout_width="122dp"
+            android:id="@+id/btnBrewerySortD"
+            android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:text="ABV"
-            app:layout_constraintStart_toStartOf="@+id/btnBrewerySort"
-            app:layout_constraintTop_toBottomOf="@+id/btnBrewerySort" />
+            android:layout_marginTop="24dp"
+            android:text="▼"
+            app:layout_constraintEnd_toEndOf="@+id/btnNameSortD"
+            app:layout_constraintTop_toBottomOf="@+id/btnNameSortD" />
 
         <Button
-            android:id="@+id/btnIbuSort"
-            android:layout_width="122dp"
+            android:id="@+id/btnBrewerySortA"
+            android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:text="IBU"
-            app:layout_constraintEnd_toEndOf="@+id/btnBrewerySort"
-            app:layout_constraintTop_toBottomOf="@+id/btnBrewerySort" />
+            android:layout_marginEnd="8dp"
+            android:text="▲"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBrewerySortD"
+            app:layout_constraintEnd_toStartOf="@+id/btnBrewerySortD"
+            app:layout_constraintTop_toTopOf="@+id/btnBrewerySortD" />
+
+        <TextView
+            android:id="@+id/lblAbvSort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Alcohol Content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintBottom_toBottomOf="@+id/btnAbvSortA"
+            app:layout_constraintStart_toStartOf="@+id/lblSortBrewery"
+            app:layout_constraintTop_toTopOf="@+id/btnAbvSortA" />
+
+        <Button
+            android:id="@+id/btnAbvSortA"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:text="▲"
+            app:layout_constraintBottom_toBottomOf="@+id/btnAbvSortD"
+            app:layout_constraintEnd_toStartOf="@+id/btnAbvSortD"
+            app:layout_constraintTop_toTopOf="@+id/btnAbvSortD" />
+
+        <Button
+            android:id="@+id/btnAbvSortD"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:text="▼"
+            app:layout_constraintEnd_toEndOf="@+id/btnBrewerySortD"
+            app:layout_constraintTop_toBottomOf="@+id/btnBrewerySortD" />
     </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

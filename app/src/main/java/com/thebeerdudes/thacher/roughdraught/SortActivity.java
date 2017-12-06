@@ -26,25 +26,76 @@ public class SortActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        Button btnName = (Button)findViewById(R.id.btnNameSort);
-        Button btnRating = (Button) findViewById(R.id.btnRatingSort);
-        Button btnBrewery = (Button)findViewById(R.id.btnBrewerySort);
-        Button btnAbv = (Button)findViewById(R.id.btnAbvSort);
-        Button btnIbu = (Button)findViewById(R.id.btnIbuSort);
+        Button btnNameA = (Button)findViewById(R.id.btnNameSortA);
+        Button btnNameD = (Button)findViewById(R.id.btnNameSortD);
+        Button btnRatingA = (Button) findViewById(R.id.btnRatingSortA);
+        Button btnRatingD = (Button) findViewById(R.id.btnRatingSortD);
+        Button btnBreweryA = (Button)findViewById(R.id.btnBrewerySortA);
+        Button btnBreweryD = (Button)findViewById(R.id.btnBrewerySortD);
+        Button btnAbvA = (Button)findViewById(R.id.btnAbvSortA);
+        Button btnAbvD = (Button)findViewById(R.id.btnAbvSortD);
 
 
-        btnRating.setOnClickListener(new View.OnClickListener() {
+        btnRatingA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(SORT_RATING);
+                setResult(SORT_RATING, getIntent());
                 finish();
             }
         });
 
-        btnName.setOnClickListener(new View.OnClickListener() {
+        btnRatingD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(SORT_NAME);
+                setResult(SORT_RATING + 10, getIntent());
+                finish();
+            }
+        });
+
+        btnNameA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(SORT_NAME, getIntent());
+                finish();
+            }
+        });
+
+        btnNameD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(SORT_NAME + 10, getIntent());
+                finish();
+            }
+        });
+
+        btnBreweryA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(SORT_BREWERY, getIntent());
+                finish();
+            }
+        });
+
+        btnBreweryD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(SORT_BREWERY + 10, getIntent());
+                finish();
+            }
+        });
+
+        btnAbvA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(SORT_ABV, getIntent());
+                finish();
+            }
+        });
+
+        btnAbvD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setResult(SORT_ABV + 10, getIntent());
                 finish();
             }
         });

@@ -32,10 +32,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:text="Add Beer"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +46,7 @@
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:ems="10"
                 android:hint="Name"
                 android:inputType="textPersonName"
@@ -78,8 +77,21 @@
                 android:ems="10"
                 android:hint="% ABV"
                 android:inputType="numberDecimal"
+                android:textAlignment="center"
                 app:layout_constraintStart_toStartOf="@+id/txtRating"
                 app:layout_constraintTop_toBottomOf="@+id/txtBrewery" />
+
+            <TextView
+                android:id="@+id/lblAbv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="% ABV"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                app:layout_constraintEnd_toEndOf="@+id/txtAbv"
+                app:layout_constraintStart_toStartOf="@+id/txtAbv"
+                app:layout_constraintTop_toBottomOf="@+id/txtAbv" />
 
             <EditText
                 android:id="@+id/txtIbu"
@@ -89,8 +101,21 @@
                 android:ems="10"
                 android:hint="IBU"
                 android:inputType="numberDecimal"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="@+id/txtRating"
                 app:layout_constraintTop_toBottomOf="@+id/txtBrewery" />
+
+            <TextView
+                android:id="@+id/lblIbu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="IBU"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                app:layout_constraintEnd_toEndOf="@+id/txtIbu"
+                app:layout_constraintStart_toStartOf="@+id/txtIbu"
+                app:layout_constraintTop_toBottomOf="@+id/txtIbu" />
 
             <EditText
                 android:id="@+id/txtRating"
@@ -104,7 +129,7 @@
                 android:inputType="numberDecimal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtIbu" />
+                app:layout_constraintTop_toBottomOf="@+id/lblAbv" />
 
             <EditText
                 android:id="@+id/txtStyle"

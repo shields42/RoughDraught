@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.Serializable;
 
 public class AddBeerActivity extends AppCompatActivity {
@@ -29,6 +31,8 @@ public class AddBeerActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Button btnAdd = (Button) findViewById(R.id.btnSubmit);
+        TextView lblTitle = (TextView)findViewById(R.id.lblTitle);
+
         final TextView txtName = (TextView) findViewById(R.id.txtName);
         final TextView txtBrewery = (TextView) findViewById(R.id.txtBrewery);
         final TextView txtStyle = (TextView) findViewById(R.id.txtStyle);
@@ -40,6 +44,9 @@ public class AddBeerActivity extends AppCompatActivity {
         beer = null;
 
         if (getIntent().getSerializableExtra("edit beer") != null){
+
+            btnAdd.setText("Save");
+            lblTitle.setText("Edit Beer");
             Beer editBeer = (Beer)getIntent().getSerializableExtra("edit beer");
             txtName.setText(editBeer.getName());
             txtBrewery.setText(editBeer.getBrewery());

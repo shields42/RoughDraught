@@ -20,6 +20,7 @@ import android.widget.ListView;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -134,18 +135,37 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public int compare(Beer currentBeer, Beer newBeer) {
                             if(currentBeer.getRating()<newBeer.getRating()){
-                                return 1;
+                                return -1;
                             }
                             else if(currentBeer.getRating()==newBeer.getRating()){
                                 return (currentBeer.getName().compareTo(newBeer.getName()));
                             }
                             else{
-                                return -1;
+                                return 11;
                             }
                         }
                     });
 
                 }
+
+                else if(resultCode == 11){
+                    Collections.sort(beersList,new Comparator<Beer>(){
+                        @Override
+                        public int compare(Beer currentBeer, Beer newBeer) {
+                            if(currentBeer.getRating()<newBeer.getRating()){
+                                return -1;
+                            }
+                            else if(currentBeer.getRating()==newBeer.getRating()){
+                                return (currentBeer.getName().compareTo(newBeer.getName()));
+                            }
+                            else{
+                                return 1;
+                            }
+                        }
+                    });
+
+                }
+
                 //Sort by Name
                 else if(resultCode==2){
                     Collections.sort(beersList,new Comparator<Beer>(){
@@ -156,6 +176,72 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
+                }
+                else if(resultCode==12){
+                    Collections.sort(beersList,new Comparator<Beer>(){
+                        @Override
+                        public int compare(Beer currentBeer, Beer newBeer) {
+                            System.out.println(beersList);
+                            return currentBeer.getName().compareTo(newBeer.getName());
+                        }
+                    });
+                    Collections.reverse(beersList);
+                }
+                else if(resultCode==3){
+                    Collections.sort(beersList,new Comparator<Beer>(){
+                        @Override
+                        public int compare(Beer currentBeer, Beer newBeer) {
+                            if (currentBeer.getBrewery().compareTo(newBeer.getBrewery())==1) {
+                                return 1;
+                            } else if (currentBeer.getBrewery().equals(newBeer.getBrewery())) {
+                                return (currentBeer.getName().compareTo(newBeer.getName()));
+                            } else {
+                                return -1;
+                            }
+                        }
+                    });
+                }
+                else if(resultCode==13){
+                    Collections.sort(beersList,new Comparator<Beer>(){
+                        @Override
+                        public int compare(Beer currentBeer, Beer newBeer) {
+                            if (currentBeer.getBrewery().compareTo(newBeer.getBrewery())==1) {
+                                return -1;
+                            } else if (currentBeer.getBrewery().equals(newBeer.getBrewery())) {
+                                return (currentBeer.getName().compareTo(newBeer.getName()));
+                            } else {
+                                return 1;
+                            }
+                        }
+                    });
+                }
+                else if(resultCode==4){
+                    Collections.sort(beersList,new Comparator<Beer>(){
+                        @Override
+                        public int compare(Beer currentBeer, Beer newBeer) {
+                            if (currentBeer.getAbv() < newBeer.getAbv()) {
+                                return 1;
+                            } else if (currentBeer.getAbv() == newBeer.getAbv()) {
+                                return (currentBeer.compareTo(newBeer));
+                            } else {
+                                return -1;
+                            }
+                        }
+                    });
+                }
+                else if(resultCode==14){
+                    Collections.sort(beersList,new Comparator<Beer>(){
+                        @Override
+                        public int compare(Beer currentBeer, Beer newBeer) {
+                            if (currentBeer.getAbv() < newBeer.getAbv()) {
+                                return -1;
+                            } else if (currentBeer.getAbv() == newBeer.getAbv()) {
+                                return (currentBeer.compareTo(newBeer));
+                            } else {
+                                return 1;
+                            }
+                        }
+                    });
                 }
             case (VIEW_BEER):
                 if(resultCode==10){ //Beer not edited. Only viewed.
