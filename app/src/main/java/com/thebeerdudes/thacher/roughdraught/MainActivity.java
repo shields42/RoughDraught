@@ -256,11 +256,12 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }
-                //Reset List Adapter
-                BeerAdapter adapter = new BeerAdapter(MainActivity.this, R.layout.beer_item, beersList);
-                lvMain.setAdapter(adapter);
+
             break;
         }
+        //Reset List Adapter
+        //BeerAdapter adapter = new BeerAdapter(MainActivity.this, R.layout.beer_item, beersList);
+        //lvMain.setAdapter(adapter);
     }
 
     @Override
@@ -303,6 +304,20 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("Updating preferences..");
         tinyDB.putListObject("Beers", list);
         System.out.println("Preferences updated!\nReloading List...");
+        Collections.sort(beersList,new Comparator<Beer>(){
+            @Override
+            public int compare(Beer currentBeer, Beer newBeer) {
+                if(currentBeer.getRating()<newBeer.getRating()){
+                    return 1;
+                }
+                else if(currentBeer.getRating()==newBeer.getRating()){
+                    return (currentBeer.getName().compareTo(newBeer.getName()));
+                }
+                else{
+                    return -1;
+                }
+            }
+        });
         BeerAdapter adapter = new BeerAdapter(MainActivity.this, R.layout.beer_item, beersList);
         lvMain.setAdapter(adapter);
         System.out.println("Adapter updated!");

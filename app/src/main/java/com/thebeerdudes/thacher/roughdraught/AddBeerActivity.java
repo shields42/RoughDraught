@@ -90,6 +90,11 @@ public class AddBeerActivity extends AppCompatActivity {
                     Toast.makeText(AddBeerActivity.this, "Style is required", Toast.LENGTH_SHORT).show();
                     txtRating.requestFocus();
                 }
+                else if(Integer.parseInt(txtRating.getText().toString()) > 100 || Integer.parseInt(txtRating.getText().toString()) < 0){
+                    System.out.println("missing Rating");
+                    Toast.makeText(AddBeerActivity.this, "Ratings are from 0 - 100", Toast.LENGTH_SHORT).show();
+                    txtRating.requestFocus();
+                }
                 else {
                     beer.setName(txtName.getText().toString());
                     beer.setBrewery(txtBrewery.getText().toString());
