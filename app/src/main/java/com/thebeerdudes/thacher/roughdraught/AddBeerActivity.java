@@ -1,5 +1,6 @@
 package com.thebeerdudes.thacher.roughdraught;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -61,18 +64,46 @@ public class AddBeerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 beer = new Beer();
-                beer.setName(txtName.getText().toString());
-                beer.setBrewery(txtBrewery.getText().toString());
-                beer.setStyle(txtStyle.getText().toString());
-                beer.setAbv(Double.parseDouble(txtAbv.getText().toString()));
-                beer.setIbu(Integer.parseInt(txtIbu.getText().toString()));
-                beer.setRating(Long.parseLong(txtRating.getText().toString()));
-                beer.setDescription(txtDescription.getText().toString());
 
-                Intent i = getIntent();
-                i.putExtra("Beer", (Serializable)beer);
-                setResult(RESULT_OK, i);
-                finish();
+                if(txtName.getText().toString().equals("")){
+                    System.out.println("Missing Name");
+                    Toast.makeText(AddBeerActivity.this, "Name is required", Toast.LENGTH_SHORT).show();
+                    txtName.requestFocus();
+                }
+                else if(txtBrewery.getText().toString().equals("")){
+                    System.out.println("Missing Brewery");
+                    Toast.makeText(AddBeerActivity.this, "Brewery is required", Toast.LENGTH_SHORT).show();
+                    txtBrewery.requestFocus();
+                }
+                else if(txtRating.getText().toString().equals("")){
+                    System.out.println("missing Rating");
+                    Toast.makeText(AddBeerActivity.this, "Rating is required", Toast.LENGTH_SHORT).show();
+                    txtRating.requestFocus();
+                }
+                else if(txtAbv.getText().toString().equals("")){
+                    System.out.println("missing ABV");
+                    Toast.makeText(AddBeerActivity.this, "Rating is required", Toast.LENGTH_SHORT).show();
+                    txtRating.requestFocus();
+                }
+                else if(txtStyle.getText().toString().equals("")){
+                    System.out.println("missing Rating");
+                    Toast.makeText(AddBeerActivity.this, "Style is required", Toast.LENGTH_SHORT).show();
+                    txtRating.requestFocus();
+                }
+                else {
+                    beer.setName(txtName.getText().toString());
+                    beer.setBrewery(txtBrewery.getText().toString());
+                    beer.setStyle(txtStyle.getText().toString());
+                    beer.setAbv(Double.parseDouble(txtAbv.getText().toString()));
+                    beer.setIbu(Integer.parseInt(txtIbu.getText().toString()));
+                    beer.setRating(Long.parseLong(txtRating.getText().toString()));
+                    beer.setDescription(txtDescription.getText().toString());
+
+                    Intent i = getIntent();
+                    i.putExtra("Beer", (Serializable) beer);
+                    setResult(RESULT_OK, i);
+                    finish();
+                }
             }
         });
 

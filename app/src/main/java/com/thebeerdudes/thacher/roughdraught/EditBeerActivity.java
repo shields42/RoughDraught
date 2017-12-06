@@ -86,7 +86,7 @@ public class EditBeerActivity extends AppCompatActivity {
         String ratingString = String.valueOf(beer.getRating());
         lblRating.setText(ratingString);
         lblStyle.setText(beer.getStyle());
-        String abvString = beer.getAbv() + "%";
+        String abvString = beer.getAbv() + "% ABV";
         lblAbv.setText(abvString);
         String ibuString = beer.getIbu() + " IBU";
         lblIbu.setText(ibuString);

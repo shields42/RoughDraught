@@ -19,10 +19,13 @@
         <activity android:name=".EditBeerActivity" />
         <activity
             android:name=".AddBeerActivity"
+            android:windowSoftInputMode="stateHidden"
             android:label=""
             android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-        <activity android:name=".SortActivity"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity android:name=".SortActivity">
+        </activity>
     </application>
 
 </manifest>
