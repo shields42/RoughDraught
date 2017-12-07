@@ -12,36 +12,44 @@
 
         <TextView
             android:id="@+id/lblBeerName"
-            android:layout_width="288dp"
+            android:layout_width="256dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Cavu"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintEnd_toStartOf="@+id/lblDetailRating"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lblDetailBrewery"
-            android:layout_width="288dp"
+            android:layout_width="256dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="12dp"
             android:text="NoDa Brewing Company"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/lblDetailRating"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblBeerName"
             app:layout_constraintVertical_bias="0.4" />
 
         <TextView
+            android:id="@+id/lblAbvItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/lblDetailBrewery"
+            app:layout_constraintEnd_toStartOf="@+id/lblDetailRating"
+            tools:text="14.5%" />
+
+        <TextView
             android:id="@+id/lblDetailRating"
-            android:layout_width="64dp"
+            android:layout_width="56dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="16dp"

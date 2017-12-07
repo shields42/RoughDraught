@@ -15,6 +15,8 @@ import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -40,10 +42,13 @@ public class BeerAdapter extends ArrayAdapter<Beer> {
         TextView lblName = (TextView)convertView.findViewById(R.id.lblBeerName);
         TextView lblBrewery = (TextView)convertView.findViewById(R.id.lblDetailBrewery);
         TextView lblRating = (TextView)convertView.findViewById(R.id.lblDetailRating);
+        TextView lblAbv = (TextView)convertView.findViewById(R.id.lblAbvItem);
 
         lblName.setText(beer.getName());
         lblBrewery.setText(beer.getBrewery());
         lblRating.setText(Long.toString(beer.getRating()));
+        String abvText = beer.getAbv() + "%";
+        lblAbv.setText(abvText);
 
         if(beer.getRating()>=90){
             lblRating.setTextColor(Color.parseColor("#2196f3"));

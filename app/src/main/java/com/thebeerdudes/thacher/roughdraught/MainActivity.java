@@ -1,26 +1,20 @@
 package com.thebeerdudes.thacher.roughdraught;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -28,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     protected ArrayList<Beer> beersList;
     protected ListView lvMain;
-    protected MenuItem btnSort;
     private final int ADD_BEER = 1;
     private final int EDIT_BEER = 2;
     private final int SORT = 3;
@@ -56,11 +49,39 @@ public class MainActivity extends AppCompatActivity {
 
         //Main List
         lvMain = (ListView) findViewById(R.id.lvBeers);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         beersList = new ArrayList<>();
 
         beersList = getBeersList();
+
+        System.out.println(beersList.toString());
+
+        for(int i = 0; i < beersList.size(); i++){
+            try{
+                if (beersList.get(i).getName()==null || beersList.get(i).getName().equals("")){
+                    beersList.get(i).setName("Error");
+                }
+                if (beersList.get(i).getBrewery()==null || beersList.get(i).getBrewery().equals("")){
+                    beersList.get(i).setBrewery("Error");
+                }
+                if (beersList.get(i).getStyle()==null || beersList.get(i).getStyle().equals("")){
+                    beersList.get(i).setStyle("Error");
+                }
+                if (beersList.get(i).getDescription()==null){
+                    beersList.get(i).setName("Error");
+                }
+
+            }catch(Exception e){
+                beersList.remove(i);
+                updateDB(beersList);
+            }
+
+        }
+
+        if(tinyDB.getAll().isEmpty())
+        {
+            beersList.add(new Beer("Test Beer", "Test Brewery", "Test Style", 4, 5, 50, "Test description"));
+        }
 
 
         Collections.sort(beersList);
@@ -141,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                                 return (currentBeer.getName().compareTo(newBeer.getName()));
                             }
                             else{
-                                return 11;
+                                return 1;
                             }
                         }
                     });
@@ -188,32 +209,26 @@ public class MainActivity extends AppCompatActivity {
                     Collections.reverse(beersList);
                 }
                 else if(resultCode==3){
+                    System.out.println("Sort by brewery");
                     Collections.sort(beersList,new Comparator<Beer>(){
                         @Override
                         public int compare(Beer currentBeer, Beer newBeer) {
-                            if (currentBeer.getBrewery().compareTo(newBeer.getBrewery())==1) {
-                                return 1;
-                            } else if (currentBeer.getBrewery().equals(newBeer.getBrewery())) {
-                                return (currentBeer.getName().compareTo(newBeer.getName()));
-                            } else {
-                                return -1;
-                            }
+                            return currentBeer.getBrewery().toString().compareTo(newBeer.getBrewery().toString());
                         }
                     });
+                    for(int i = 0; i<beersList.size(); i++){
+                            Beer testBeer = beersList.get(i);
+                            System.out.println(testBeer.getBrewery() + "\n");
+                    }
                 }
                 else if(resultCode==13){
                     Collections.sort(beersList,new Comparator<Beer>(){
                         @Override
                         public int compare(Beer currentBeer, Beer newBeer) {
-                            if (currentBeer.getBrewery().compareTo(newBeer.getBrewery())==1) {
-                                return -1;
-                            } else if (currentBeer.getBrewery().equals(newBeer.getBrewery())) {
-                                return (currentBeer.getName().compareTo(newBeer.getName()));
-                            } else {
-                                return 1;
-                            }
+                            return(currentBeer.getBrewery().toString().compareTo(newBeer.getBrewery().toString()));
                         }
                     });
+                    Collections.reverse(beersList);
                 }
                 else if(resultCode==4){
                     Collections.sort(beersList,new Comparator<Beer>(){
@@ -260,8 +275,8 @@ public class MainActivity extends AppCompatActivity {
             break;
         }
         //Reset List Adapter
-        //BeerAdapter adapter = new BeerAdapter(MainActivity.this, R.layout.beer_item, beersList);
-        //lvMain.setAdapter(adapter);
+        BeerAdapter adapter = new BeerAdapter(MainActivity.this, R.layout.beer_item, beersList);
+        lvMain.setAdapter(adapter);
     }
 
     @Override

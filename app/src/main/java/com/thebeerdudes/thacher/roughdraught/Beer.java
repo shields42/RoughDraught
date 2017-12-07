@@ -15,7 +15,6 @@ public class Beer implements Comparable<Beer>, Serializable{
     protected int ibu;
     protected long rating;
     protected String description;
-    protected int _id;
 
     @Override
     public int compareTo(Beer b) {
@@ -28,6 +27,13 @@ public class Beer implements Comparable<Beer>, Serializable{
     }
 
     public Beer() {
+        this.name = "Missing";
+        this.brewery = "Missing";
+        this.style = "Missing";
+        this.abv = 0;
+        this.ibu = 0;
+        this.rating = 0;
+        this.description = "Missing";
 
     }
 
@@ -42,7 +48,12 @@ public class Beer implements Comparable<Beer>, Serializable{
     }
 
     public String getName() {
-        return name;
+        if(name.equals(null) || name==null || name=="" || name.toString().equals(null)){
+            return "ERROR";
+        }
+        else{
+            return name.toString();
+        }
     }
 
     public void setName(String name) {
@@ -97,11 +108,9 @@ public class Beer implements Comparable<Beer>, Serializable{
         this.description = description;
     }
 
-    public int get_id() {
-        return _id;
-    }
-
-    public void set_id(int _id) {
-        this._id = _id;
+    @Override
+    public String toString() {
+        String returnVal = this.getName() + "\n";
+        return this.getName();
     }
 }
